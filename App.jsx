@@ -18,7 +18,7 @@ import Location from "./src/screens/Location"; // Import your Location component
 import Chat from "./src/screens/Chat"; // Import your chat component
 import Others from "./src/screens/Others"; // Import your others component
 // import CoachesScreen from "./screens/CoachesScreen";
-// import PlayersScreen from "./screens/PlayersScreen";
+import PlayersScreen from "./src/screens/PlayersScreen";
 // import GroundsScreen from "./screens/GroundsScreen";
 // import GroundsDetails from "./screens/GroundsDetails"; // Ensure this path is correct
 import BookingConfirmationScreen from "./src/screens/BookingConfirmationScreen"; // Ensure this path is correct
@@ -34,7 +34,7 @@ import BookingConfirmationScreen from "./src/screens/BookingConfirmationScreen";
 // import EditCertifications from "./screens/EditCertifications";
 // import IndividualCertificationEdit from "./screens/IndividualCertificationEdit";
 // import DeleteConfirmationPopup from "./screens/DeleteConfirmationPopup";
-// import FilterModal from "./screens/FilterModal";
+import FilterModal from "./src/screens/FilterModal";
 // import VerifyYourSelfStudent from "./screens/VerifyYourSelfStudent";
 import SelectProfile from "./src/screens/SelectProfile";
 import SignUp from "./src/screens/SignUp";
@@ -440,16 +440,22 @@ const App = () => {
           headerStyle: { backgroundColor: '#fff' }, // Style the header
         }}
       />
+      <Stack.Screen
+            name="PlayersScreen"
+            component={PlayersScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="FilterModal"
+            component={FilterModal}
+            options={{ headerShown: true }}
+          />
           {/* Stack screens that might show a header */}
           {/* <Stack.Screen name="GroundsDetails" component={GroundsDetails} />
           <Stack.Screen name="BookingPage" component={BookingPage} />
           
           <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-          <Stack.Screen
-            name="PlayersScreen"
-            component={PlayersScreen}
-            options={{ headerShown: false }}
-          />
+          
           <Stack.Screen
             name="CoachesScreen"
             component={CoachesScreen}
@@ -515,11 +521,7 @@ const App = () => {
             component={DeleteConfirmationPopup}
             options={{ headerShown: true }}
           />
-          <Stack.Screen
-            name="FilterModal"
-            component={FilterModal}
-            options={{ headerShown: true }}
-          />
+          
           <Stack.Screen
             name="VerifyYourSelfStudent"
             component={VerifyYourSelfStudent}
