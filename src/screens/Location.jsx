@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 // import { MaterialIcons } from '@expo/vector-icons';
@@ -16,13 +16,30 @@ const NearbyScreen = () => {
 
   const [searchText, setSearchText] = useState('');
   const [activeButton, setActiveButton] = useState(null);
+  const [mapView, setMapView] = useState(null);
+  useEffect(() => {
+    if (mapView) {
+      mapView.animateToRegion({
+        latitude: 28.6139,
+        longitude: 77.2090,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },1000);
+    }
+  }, [mapView]);
 
   const playersAndCoaches = [
     {
       name: 'Rohit',
       rating: 3.8,
-      latitude: 28.6139,
-      longitude: 77.2090,
+      latitude: 17.000538,
+      longitude:81.804031,
+      image: require('../assets/Logo.png'),
+    }, {
+      name: 'mahesh',
+      rating: 3.8,
+      latitude: 17.081570,
+      longitude: 81.766930,
       image: require('../assets/Logo.png'),
     },
     // Add more players and coaches here
@@ -69,6 +86,7 @@ const NearbyScreen = () => {
         ))}
       </MapView> */}
        <MapView
+       ref={(map) => setMapView(map)}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={initialRegion}
@@ -157,15 +175,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     // padding: 10,
     borderRadius: 10,
-    alignItems: 'center',
+    // alignItems: 'center',
     // width:100,
     // height:100
   },
   markerImage: {
-    width: 50,
-    height: 50,
+    width: 38,
+    height: 38,
     borderRadius: 25,
-    resizeMode:'contain'
   },
   markerRating: { fontSize: 12, marginTop: 5 },
   searchContainer: {

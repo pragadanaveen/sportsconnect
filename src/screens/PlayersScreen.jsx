@@ -143,26 +143,24 @@ const PlayersScreen = () => {
         }}  title={"Testing"} onPress={data=>console.log(data.nativeEvent.coordinate)}/> */}
 
 
-
-
         {players.map((person) => (
           <Marker
-            key={person.name}
-            coordinate={{
-              latitude: person.latitude,
-              longitude: person.longitude,
-            }}
-            onPress={() => openPlayerProfile(person)}
-          >
-            <View style={styles.marker}>
-              <Image
-                source={person.image}
-                style={styles.markerImage}
-                resizeMode="cover"
-              />
-              <Text style={styles.markerRating}>{person.rating}</Text>
-            </View>
-          </Marker>
+          key={person.name}
+          coordinate={{
+            latitude: person.latitude,
+            longitude: person.longitude,
+          }}
+          onPress={() => openPlayerProfile(person)}
+        >
+          <View style={styles.markerContainer}>
+            <Image
+              source={person.image}
+              style={styles.markerImage}
+              resizeMode='contain'
+            />
+            <Text style={styles.markerRating}>{person.rating}</Text>
+          </View>
+        </Marker>
         ))}
       </MapView>
       {/* Search and Filter Bar */}
@@ -303,22 +301,23 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   map: { width: "100%", height: "100%" },
   marker: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 10,
+    // alignItems: "center",
+    // justifyContent: "center",
+    // padding: 10,
     backgroundColor: "white",
     borderRadius: 40,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5, // For Android shadow
-    width: 120
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.2,
+    // shadowRadius: 4,
+    // elevation: 5, 
+    // width: 120
   },
   markerImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30, // Circular image
+    width: 38,
+    height: 38,
+    // borderRadius: 30, 
+    // resizeMode:'contain'
   },
   markerRating: {
     fontSize: 14,

@@ -8,9 +8,8 @@ import {
   TextInput,
   ScrollView,
   Dimensions,
-  KeyboardAvoidingView,
 } from "react-native";
-// import Ionicons from 'react-native-vector-icons/Ionicons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';  // Importing Ionicons
 const { width, height } = Dimensions.get("window");
 
 const FilterModal = ({ visible, closeModal }) => {
@@ -65,9 +64,8 @@ const FilterModal = ({ visible, closeModal }) => {
   const renderSportOptions = (sport) => {
     const options = sportSpecificOptions[sport] || [];
     return options.map((option, index) => (
-      <View key={index} style={styles.checkboxRow}>
-        <Text style={styles.sportNameText}>{option}</Text>
-        <TouchableOpacity
+      <View key={index} style={styles.checkboxRoww}>
+         <TouchableOpacity
           onPress={() => toggleOptionSelection(sport, option)}
         >
           <View
@@ -78,10 +76,12 @@ const FilterModal = ({ visible, closeModal }) => {
             ]}
           >
             {sportOptions[sport]?.includes(option) && (
-              <View style={styles.tickMark}></View>
+              <Ionicons name="checkmark" size={15} color="white" />
             )}
           </View>
         </TouchableOpacity>
+        <Text style={styles.sportNameText}>{option}</Text>
+       
       </View>
     ));
   };
@@ -100,7 +100,7 @@ const FilterModal = ({ visible, closeModal }) => {
           </View>
           {Object.keys(sportSpecificOptions).map((sport, index) => (
             <View key={index} style={styles.checkboxRow}>
-              <Text style={styles.sportNameText}>{sport}</Text>
+              <View style={styles.checkboxRoww}>
               <TouchableOpacity onPress={() => toggleSportSelection(sport)}>
                 <View
                   style={[
@@ -110,21 +110,24 @@ const FilterModal = ({ visible, closeModal }) => {
                   ]}
                 >
                   {selectedSports.includes(sport) && (
-                    <View style={styles.tickMark}></View>
+                    <Ionicons name="checkmark" size={15} color="white" />
                   )}
                 </View>
               </TouchableOpacity>
+              <Text style={styles.sportNameText}>{sport}</Text>
+                  <View style={styles.hr}></View>
+              </View>
+              {selectedSports.includes(sport) && (
+                <View style={styles.sportOptionsContainer}>
+                  <Text style={styles.subHeaderText}>{sport} Options</Text>
+                  {renderSportOptions(sport)}
+                </View>
+              )}
             </View>
           ))}
           {selectedSports.length === 0 && (
             <Text style={styles.placeholderText}>No sports selected</Text>
           )}
-          {selectedSports.map((sport) => (
-            <View key={sport} style={styles.sportOptionsContainer}>
-              <Text style={styles.subHeaderText}>{sport} Options</Text>
-              {renderSportOptions(sport)}
-            </View>
-          ))}
         </View>
       );
     }
@@ -134,7 +137,6 @@ const FilterModal = ({ visible, closeModal }) => {
   return (
     <Modal visible={visible} animationType="slide" transparent={true}>
       <View style={styles.modalOverlay}>
-        <KeyboardAvoidingView>
         <View style={styles.modalContent}>
           <View style={styles.headerRow}>
             <Text style={styles.headerTitle}>Filters</Text>
@@ -166,12 +168,6 @@ const FilterModal = ({ visible, closeModal }) => {
               </View>
               <View style={styles.column}>
                 <View style={styles.searchBarContainer}>
-                  {/* <Icon
-                    name="search"
-                    size={15}
-                    color="gray"
-                    style={styles.searchIcon}
-                  /> */}
                   <TextInput
                     style={styles.searchBar}
                     placeholder="Search..."
@@ -196,7 +192,6 @@ const FilterModal = ({ visible, closeModal }) => {
             </TouchableOpacity>
           </View>
         </View>
-        </KeyboardAvoidingView>
       </View>
     </Modal>
   );
@@ -211,7 +206,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: "100%",
-    height: height * 0.93,
+    height: height * 0.92,
     paddingVertical: height * 0.02,
     backgroundColor: "white",
     borderTopLeftRadius: 10,
@@ -262,8 +257,8 @@ const styles = StyleSheet.create({
   },
   column: {
     width: "60%",
-    paddingLeft: "5%",
-    paddingTop: height * 0.02,
+    paddingHorizontal:'10',
+    paddingVertical:'10',
   },
   searchBarContainer: {
     flexDirection: "row",
@@ -307,14 +302,14 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
   },
-  checkboxRow: {
+  checkboxRoww: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    // alignItems: "center",
     marginBottom: 10,
   },
   sportNameText: {
     fontSize: width * 0.04,
+    marginLeft:10
   },
   checkboxContainer: {
     marginTop: 10,
@@ -331,12 +326,6 @@ const styles = StyleSheet.create({
   radioButtonSelected: {
     backgroundColor: "green",
     borderColor: "green",
-  },
-  tickMark: {
-    width: 10,
-    height: 10,
-    backgroundColor: "white",
-    borderRadius: 2,
   },
   sportOptionsContainer: {
     marginVertical: 10,
@@ -360,6 +349,11 @@ const styles = StyleSheet.create({
     color: "gray",
     textAlign: "center",
     marginTop: 10,
+  },
+  hr: {
+    borderBottomWidth: 1, 
+    borderBottomColor: "black", 
+    marginVertical: 10, 
   },
 });
 

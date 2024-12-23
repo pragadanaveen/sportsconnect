@@ -22,7 +22,6 @@ import PlayersScreen from "./src/screens/PlayersScreen";
 // import GroundsScreen from "./screens/GroundsScreen";
 // import GroundsDetails from "./screens/GroundsDetails"; // Ensure this path is correct
 import BookingConfirmationScreen from "./src/screens/BookingConfirmationScreen"; // Ensure this path is correct
-// import ProfileScreen from "./screens/ProfileScreen"; // Ensure this path is correct
 // import BookingPage from "./screens/BookingPage";
 // import EditDetails from "./screens/EditDetails";
 // import EditSports from "./screens/EditSports";
@@ -126,6 +125,7 @@ import TeamInfoCaptain from './src/screens/TeamInfoCaptain';
 import NotificationsScreen from './src/screens/NotificationsScreen';
 import CoachConnect from './src/screens/CoachConnect';
 import CoachConnect_CardInfo from './src/screens/CoachConnect_CardInfo';
+import ProfileScreen from "./src/screens/ProfileScreen";
 // import Gm_Editbanner from "./screens/Gm_Editbanner";
 
 const Tab = createBottomTabNavigator();
@@ -450,11 +450,12 @@ const App = () => {
             component={FilterModal}
             options={{ headerShown: true }}
           />
+           <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           {/* Stack screens that might show a header */}
           {/* <Stack.Screen name="GroundsDetails" component={GroundsDetails} />
           <Stack.Screen name="BookingPage" component={BookingPage} />
           
-          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+         
           
           <Stack.Screen
             name="CoachesScreen"
